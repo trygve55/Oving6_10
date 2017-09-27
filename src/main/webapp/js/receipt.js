@@ -11,10 +11,10 @@ function jsonToReceipt(reservation) {
     for (var i = 0; i < reservation.foods.length;i++) {
         var food = reservation.foods[i];
         sum += food.amount * food.price;
-        string+= food.amount + "x " + food.name + " kr " + food.price + "<br>";
+        string+= food.amount + "x " + food.name + " kr " + food.price.toFixed(2) + "<br>";
     }
 
-    string += "<br>Sum: kr " + sum;
+    string += "<br>Sum: kr " + sum.toFixed(2);
     return string;
 }
 

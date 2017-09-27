@@ -96,7 +96,7 @@ public class ResturantControl {
         calendar.add(Calendar.MINUTE, 89);
         reservation.setEnd(calendar.getTime());
 
-        if (reservation.getStart().toInstant().isAfter(Instant.now())) throw new IllegalArgumentException("You can not time travel.");
+        if (reservation.getStart().toInstant().isBefore(Instant.now())) throw new IllegalArgumentException("You can not time travel.");
         if (!database.isReservationsPossible(reservation)) throw new IllegalArgumentException("A reservation already exists on this table and time.");
         if (reservation.getFoods().size() == 0) throw new IllegalArgumentException("An reservation needs food");
 
