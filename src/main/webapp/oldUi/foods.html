@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css">
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+    <title>Meny</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script>
+            $(document).ready(function(){
+
+                $('#myTable').DataTable( {
+                    ajax: {
+                        url: 'rest/food',
+                        dataSrc: ''
+                    },                  
+                    columns: [
+                        { data: 'id' },
+                        { data: 'type' },
+                        { data: 'name' },
+                        { data: 'desc' },
+                        { data: 'price' }
+                    ]
+                });
+
+                $("#delete").click(function () {
+                    $.ajax({
+                        url: 'rest/food/' + $("#deleteId").val(),
+                        type: 'DELETE',
+                        success: function(result) {
+                            $('#myTable').DataTable().ajax.reload();
+                        }
+                    });
+                });
+
+                $("#create").click(function () {
+                    $.ajax({
+                        url: 'rest/food',
+                        type: 'POST',
+                        data: JSON.stringify({
+                            id: -1,
+                            typeId: $("#newTypeId").val(),
+                            name: $("#newName").val(),
+                            desc: $("#newDesc").val(),
+                            price: parseFloat($("#newPrice").val()),
+                        }),
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
+                        success: function(result) {
+                            $('#myTable').DataTable().ajax.reload();
+                        }
+                    });
+                });
+
+                $("#update").click(function () {
+                    $.ajax({
+                        url: 'rest/food',
+                        type: 'POST',
+                        data: JSON.stringify({
+                            id: -1,
+                            typeId: $("#newTypeId").val(),
+                            name: $("#newName").val(),
+                            desc: $("#newDesc").val(),
+                            price: parseFloat($("#newPrice").val()),
+                        }),
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
+                        success: function(result) {
+                            $('#myTable').DataTable().ajax.reload();
+                        }
+                    });
+                });
+            });
+        </script>
+</head>
+<body>
+<h1>Meny</h1>
+<table id="myTable" class="display compact">
+    <thead>
+    <tr><th>ID</th><th>Type</th><th>Navn</th><th>Beskrivelse</th><th>pris</th></tr>
+    </thead>
+</table>
+
+<input id="deleteId" type="number" value="">
+<button id="delete">Delete</button>
+<br><br>
+
+Id: <input id="newId" type="number" value=""><br>
+Mat:<input id="newName" type="text" value="Food"><br>
+Beskrivelse:<input id="newDesc" type="text" value="So good"><br>
+Pris (kr):<input id="newPrice" type="number" value="3.50"><br>
+Type: <select id="newTypeId">
+    <option value=0>Forrett</option>
+    <option value=1>Hovedrett</option>
+    <option value=2>Dessert</option>
+    <option value=3>Drikke</option>
+</select><br>
+<button id="create">Create New</button>
+<button id="update">Update</button><br>
+</body>
+</html>

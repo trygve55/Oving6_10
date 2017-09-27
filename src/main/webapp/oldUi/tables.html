@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css">
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+    <title>Bord</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script>
+            $(document).ready(function(){
+                $('#myTable').DataTable( {
+                    ajax: {
+                        url: 'rest/table/',
+                        dataSrc: ''
+                    },
+                    columns: [
+                        { data: 'id' },
+                        { data: 'size' }
+                    ]
+                });
+                
+                // Slett rest-ressursen '/kunder/kundeId'
+                $("#delete").click(function () {
+                    $.ajax({
+                        url: 'rest/table/' + $("#deleteId").val(),
+                        type: 'DELETE',
+                        success: function(result) {
+                            $('#myTable').DataTable().ajax.reload();
+                        }
+                    });
+                });
+                
+                // Lag ny rest-ressursen under '/kunder/'
+                $("#create").click(function () {
+                    $.ajax({
+                        url: 'rest/table',
+                        type: 'POST',
+                        data: JSON.stringify({
+                            id: parseInt($("#tableId").val()),
+                            size: parseInt($("#tableSize").val()),
+                        }),
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
+                        success: function(result) {
+                            $('#myTable').DataTable().ajax.reload();
+                        }
+                    });
+                });
+
+                // Oppdater rest-ressursen under '/kunder/'
+                $("#update").click(function () {
+                    $.ajax({
+                        url: 'rest/table',
+                        type: 'PUT',
+                        data: JSON.stringify({
+                            id: parseInt($("#tableId").val()),
+                            size: parseInt($("#tableSize").val()),
+                        }),
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
+                        success: function(result) {
+                            $('#myTable').DataTable().ajax.reload();
+                        }
+                    });
+                });
+            });
+        </script>
+</head>
+<body>
+<h1>Bord</h1>
+<table id="myTable" class="display compact">
+    <thead>
+    <tr><th>ID</th><th>Antall plasser</th></tr>
+    </thead>
+</table>
+
+Bord nummer:<input id="deleteId" type="number" value="">
+<button id="delete">Fjern</button>
+<br><br>
+
+Bord nummer:<input id="tableId" type="number" value=""><br>
+Antall plasser:<input id="tableSize" type="number" value=""><br>
+<button id="create">Legg til</button>
+<button id="update">Endre antall plasser</button><br>
+</body>
+</html>
