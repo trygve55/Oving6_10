@@ -26,11 +26,12 @@ function updateFoods(food) {
             else {
                 foods[i] = food;
             }
-            console.log(foods);
+
             updateTotalPrice();
             return;
         }
     }
+
     foods.push(food);
     updateTotalPrice();
 }
@@ -55,7 +56,7 @@ function validateFields() {
         $("#errorText").html("Du må fylle inn et navn.");
         return false;
     }
-    if ($("#tableSize").val() <= 0) {
+    if ($("#tableSize").val() < 1) {
         $("#errorText").html("Antall personer må være minst en.");
         return false;
     }

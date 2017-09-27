@@ -54,7 +54,7 @@
             </div>
             <div class="form-group">
                 <label for="tableSize">Antall personer:</label>
-                <input type="number" class="form-control" id="tableSize" value=1>
+                <input type="number" class="form-control" id="tableSize" value=1  min=1 step=1 data-bind="value:replyNumber">
             </div>
             <div class="form-group">
                 <label for="tableId">Bord nummer:</label>
@@ -63,12 +63,12 @@
         </div>
         <div class="well">
             <h2>Meny</h2>
-            <select  id="foodTypeId" class="form-control">
+           <!-- <select  id="foodTypeId" class="form-control">
                 <option value="Forrett">Forrett</option>
                 <option value="Hovedrett">Hovedrett</option>
                 <option value="Dessert">Dessert</option>
                 <option value="Drikke">Drikke</option>
-            </select><br>
+            </select><br> -->
             <table id="foodTable" class="display compact">
                 <thead>
                 <tr><th>Type</th><th>Navn</th><th>Beskrivelse</th><th>pris</th><th></th><th>Antall</th><th></th><th>Total Pris</th></tr>

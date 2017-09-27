@@ -1,3 +1,12 @@
+function validateFields() {
+    if ($("#newSize").val() <= 0) {
+        $("#errorText").html("Bordet må ha minst en i størrelse.");
+        return false;
+    }
+    $("#errorText").html("");
+    return true;
+}
+
 $(document).ready(function(){
     $('#tableTable').DataTable( {
         searching: false,
@@ -23,19 +32,21 @@ $(document).ready(function(){
     });
 
     $("#create").click(function () {
-        $.ajax({
-            url: 'rest/table',
-            type: 'POST',
-            data: JSON.stringify({
-            id: -1,
-            size: $("#newSize").val(),
-            }),
-            contentType: 'application/json; charset=utf-8',
-            dataType: 'json',
-            success: function(result) {
-                $('#tableTable').DataTable().ajax.reload();
-                alert("bord lagt til.");
-            }
-        });
+        if (validateFields()) {
+            $.ajax({
+                url: 'rest/table',
+                type: 'POST',
+                data: JSON.stringify({
+                id: -1,
+                size: Math.floor($("#newSize").val()),
+                }),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function(result) {
+                    $('#tableTable').DataTable().ajax.reload();
+                    alert("bord lagt til.");
+                }
+            });
+        }
     });
 });

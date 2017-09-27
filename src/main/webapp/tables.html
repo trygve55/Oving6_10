@@ -41,9 +41,9 @@
             <h2>Legg til bord</h2>
             <div class="form-group">
                 <label for="newSize">Antall plasser:</label>
-                <input type="number" class="form-control" id="newSize" value=1>
+                <input type="number" class="form-control" id="newSize" value=1  min=1 step=1  data-bind="value:replyNumber">
             </div>
-            <button id="create" type="button" class="btn">Legg til bord.</button>
+            <button id="create" type="button" class="btn">Legg til bord.</button><text id="errorText" style="color: red; padding-left: 0.6cm;"></text>
         </div>
 
         <div class="well">
