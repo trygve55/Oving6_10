@@ -154,6 +154,8 @@ public class ResturantControl {
         database.removeTable(tableId);
     }
 
+    public static void changeTable(int tableId, int newSize){ database.changeTable(tableId, newSize); }
+
     public static Collection<Table> getFreeTables(LocalDateTime localDateTime, int minSize) {
         return database.getFreeTables(localDateTime, minSize);
     }

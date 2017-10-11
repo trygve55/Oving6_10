@@ -43,6 +43,13 @@ public class RestTables {
         ResturantControl.removeTable(Integer.parseInt(tableId));
     }
 
+    @POST
+    @Path("/{tableId}/{newSize}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void removeBord(@PathParam("tableId") String tableId, @PathParam("newSize") String newSize) {
+        ResturantControl.changeTable(Integer.parseInt(tableId), Integer.parseInt(newSize));
+    }
+
     @GET
     @Path("/free/{timeDate}/{minSize}")
     @Produces(MediaType.APPLICATION_JSON)

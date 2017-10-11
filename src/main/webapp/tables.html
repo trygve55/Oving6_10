@@ -40,17 +40,37 @@
         <div class="well">
             <h2>Legg til bord</h2>
             <div class="form-group">
-                <label for="newSize">Antall plasser:</label>
+                <label for="size">Antall plasser:</label>
+                <input type="number" class="form-control" id="size" value=1  min=1 step=1  data-bind="value:replyNumber">
+            </div>
+            <button id="create" type="button" class="btn">Legg til bord</button><text id="errorText" style="color: red; padding-left: 0.6cm;"></text>
+        </div>
+
+        <div class="well">
+            <h2>Endre bord</h2>
+            <div class="form-group">
+                <label for="changeId">Bordnummer:</label>
+                <input type="number" class="form-control" id="changeId" value=1  min=1 step=1  data-bind="value:replyNumber"> <!-- max = høyeste bordnummer -->
+                <label for="newSize">Nytt antall plasser:</label>
                 <input type="number" class="form-control" id="newSize" value=1  min=1 step=1  data-bind="value:replyNumber">
             </div>
-            <button id="create" type="button" class="btn">Legg til bord.</button><text id="errorText" style="color: red; padding-left: 0.6cm;"></text>
+            <button id="change" type="button" class="btn">Endre bord</button><text id="errorText" style="color: red; padding-left: 0.6cm;"></text>
+        </div>
+
+        <div class="well">
+            <h2>Slett bord</h2>
+            <div class="form-group">
+                <label for="deleteId">Bordnummer:</label>
+                <input type="number" class="form-control" id="deleteId" value=1  min=1 step=1  data-bind="value:replyNumber">
+            </div>
+            <button id="delete" type="button" class="btn">Fjern bord</button><text id="errorText" style="color: red; padding-left: 0.6cm;"></text>
         </div>
 
         <div class="well">
             <h1>Bord</h1>
             <table id="tableTable" class="display compact">
                 <thead>
-                <tr><th>Bord numer</th><th>Plasser</th></tr>
+                <tr><th>Bordnummer</th><th>Plasser</th></tr>
                 </thead>
             </table>
         </div>

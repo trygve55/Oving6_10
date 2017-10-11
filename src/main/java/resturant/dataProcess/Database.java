@@ -195,6 +195,10 @@ public class Database {
         }
     }
 
+    public void changeTable(int tableId, int newSize){
+        //Pliz add code here trygve
+    }
+
     public Collection<Food> getFoods() {
         Connection connection = null;
         Statement statement = null;
