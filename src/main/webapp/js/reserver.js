@@ -206,9 +206,10 @@ $(document).ready(function() {
 
     $('#foodTable tbody').on('click', 'td.less-food', function () {
         var row = foodTable.row($(this).closest('tr'));
-        var data = row;
-        if (data.amount > 0) data.amount--;
-        row.invalidate("data").draw();
-        updateFoods(data);
+        var data = row.data();
+        if (data.amount > 0) {data.amount--;
+            row.invalidate("data").draw();
+            updateFoods(data);
+        }
     } );
 })

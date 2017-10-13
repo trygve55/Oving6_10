@@ -44,7 +44,15 @@ function getQueryVariable(variable) {
     alert('Query Variable ' + variable + ' not found');
 }
 
+
 $(document).ready(function() {
+    var doc = new jsPDF();
+        var specialElementHandlers = {
+            '#editor': function (element, renderer) {
+                return true;
+            }
+        };
+
     var reservation;
     $.ajax({
         url: 'rest/reserver/' + getQueryVariable("id"),
@@ -54,5 +62,14 @@ $(document).ready(function() {
             console.log(reservation);
             $("#text").html(jsonToReceipt(reservation));
         }
+    });
+
+    $('#cmd').click(function () {
+        console.log("test");
+        doc.fromHTML($('#receipt').html(), 15, 15, {
+            'width': 170,
+            'elementHandlers': specialElementHandlers
+        });
+        doc.save('test.pdf');
     });
 });

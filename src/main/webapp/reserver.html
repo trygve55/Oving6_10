@@ -63,12 +63,13 @@
         </div>
         <div class="well">
             <h2>Meny</h2>
-           <!-- <select  id="foodTypeId" class="form-control">
+           <select  id="foodTypeId" class="form-control">
+               <option value="Alle">Alle</option>
                 <option value="Forrett">Forrett</option>
                 <option value="Hovedrett">Hovedrett</option>
                 <option value="Dessert">Dessert</option>
                 <option value="Drikke">Drikke</option>
-            </select><br> -->
+            </select><br>
             <table id="foodTable" class="display compact">
                 <thead>
                 <tr><th>Type</th><th>Navn</th><th>Beskrivelse</th><th>pris</th><th></th><th>Antall</th><th></th><th>Total Pris</th></tr>
@@ -76,81 +77,57 @@
             </table>
             <div style="text-align: right; margin-right: 1.45cm;"><br> Sum: kr <number id="foodSum">0.00</number></div>
         </div>
-
-
-        <div class="well">
-            <!--
-            <h2>Betalingsinformasjon</h2>
-            <div class="form-group">
-                <label for="cardNumber">Kortnummer:</label>
-                <input type="number" class="form-control" id="cardNumber">
-            </div>
-            <div class="form-group">
-                <label for="cardPin">Kontrollsiffer:</label>
-                <input type="number" class="form-control" id="cardPin">
-            </div>
-            <div class="form-group">
-                <label for="cardExpiryDate">Utløpsdato:</label>
-                <div class='input-group date' id='cardExpiryDate'>
-                    <input type='text' class="form-control"/>
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-            </div>
-            -->
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 col-md-4 col-md-offset-4">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <h3 class="text-center">Betalingsinformasjon</h3>
-                                    <img class="img-responsive cc-img" src="http://www.prepbootstrap.com/Content/images/shared/misc/creditcardicons.png">
-                                </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-4 col-md-offset-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <h3 class="text-center">Betalingsinformasjon</h3>
+                                <img class="img-responsive cc-img" src="http://www.prepbootstrap.com/Content/images/shared/misc/creditcardicons.png">
                             </div>
-                            <div class="panel-body">
-                                <form role="form">
-                                    <div class="row">
-                                        <div class="col-xs-12">
-                                            <div class="form-group">
-                                                <label>Kort nummer</label>
-                                                <div class="input-group">
-                                                    <input type="tel" class="form-control" placeholder="Gyldig kort nummer" />
-                                                    <span class="input-group-addon"><span class="fa fa-credit-card"></span></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xs-7 col-md-7">
-                                            <div class="form-group">
-                                                <label><span class="hidden-xs">UTLØPS</span><span class="visible-xs-inline">EXP</span> DATO</label>
-                                                <input type="tel" class="form-control" placeholder="MM / YY" />
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-5 col-md-5 pull-right">
-                                            <div class="form-group">
-                                                <label>CV KODE</label>
-                                                <input type="tel" class="form-control" placeholder="CVC" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xs-12">
-                                            <div class="form-group">
-                                                <label>KORT EIER</label>
-                                                <input type="text" class="form-control" placeholder="Kort eier navn" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="panel-footer">
+                        </div>
+                        <div class="panel-body">
+                            <form role="form">
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <button id="order" class="btn btn-warning btn-lg btn-block">Order</button>
+                                        <div class="form-group">
+                                            <label>Kort nummer</label>
+                                            <div class="input-group">
+                                                <input type="tel" class="form-control" placeholder="Gyldig kort nummer" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" maxlength="16"/>
+                                                <span class="input-group-addon"><span class="fa fa-credit-card"></span></span>
+                                            </div>
+                                        </div>
                                     </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-7 col-md-7">
+                                        <div class="form-group">
+                                            <label><span class="hidden-xs">UTLØPS</span><span class="visible-xs-inline">EXP</span> DATO</label>
+                                            <input type="text" class="form-control" placeholder="MM / YY" oninput="this.value = this.value.replace(/[^0-9.+/]/g, '')" maxlength="5"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-5 col-md-5 pull-right">
+                                        <div class="form-group">
+                                            <label>CV KODE</label>
+                                            <input type="text" class="form-control" placeholder="CVC" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" maxlength="3" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="form-group">
+                                            <label>KORT EIER</label>
+                                            <input type="text" class="form-control" placeholder="Kort eier navn" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="panel-footer">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <button id="order" class="btn btn-warning btn-lg btn-block">Order</button>
                                 </div>
                             </div>
                         </div>
