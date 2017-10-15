@@ -38,4 +38,11 @@ public class RestFood {
     public void removeFood(@PathParam("foodId") String foodId) {
         ResturantControl.removeFood(Integer.parseInt(foodId));
     }
+
+    @GET
+    @Path("/types/")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String getFoodTypes() {
+        return "";
+    }
 }

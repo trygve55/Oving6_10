@@ -160,4 +160,11 @@ public class ResturantControl {
         return database.getFreeTables(localDateTime, minSize);
     }
 
+    public static String[] getFoodTypes() {
+        return new String[]{};
+    }
+
+    public static int getMaxTablePlaces() {
+        return database.getMaxTablePlaces();
+    }
 }

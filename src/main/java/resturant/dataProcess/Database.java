@@ -199,6 +199,35 @@ public class Database {
         //Pliz add code here trygve
     }
 
+    public int getMaxTablePlaces() {
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet rs = null;
+
+        int maxPlaces = -1;
+
+        try {
+            connection = dataSource.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery("SELECT MAX(bord_size) FROM Bord;");
+
+            if (rs.next()) maxPlaces = rs.getInt(1);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (statement != null) statement.close();
+                if (connection != null) connection.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return maxPlaces;
+    }
+
+
     public Collection<Food> getFoods() {
         Connection connection = null;
         Statement statement = null;

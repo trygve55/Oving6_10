@@ -56,4 +56,11 @@ public class RestTables {
     public Collection<Table> getFreeBord(@PathParam("timeDate") String timeDate, @PathParam("minSize") String minSize) {
         return ResturantControl.getFreeTables(LocalDateTime.ofInstant(ZonedDateTime.parse(timeDate).toInstant(), ZoneId.systemDefault()), Integer.parseInt(minSize));
     }
+
+    @GET
+    @Path("/maxTablePlaces")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String getFreeBord() {
+        return String.valueOf(ResturantControl.getMaxTablePlaces());
+    }
 }

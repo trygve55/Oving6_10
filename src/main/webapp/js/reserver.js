@@ -52,6 +52,7 @@ function updateFreeBords() {
 }
 
 function validateFields() {
+    $("#errorWell").css("visibility", "visible");
     if ($("#name").val().length == 0) {
         $("#errorText").html("Du må fylle inn et navn.");
         return false;
@@ -80,6 +81,7 @@ function validateFields() {
         $("#errorText").html("Kortet må ikke ha gått ut.");
         return false;
     }
+    $("#errorWell").css("visibility", "hidden");
     $("#errorText").html("");
     return true;
 }
@@ -138,27 +140,27 @@ $(document).ready(function() {
         }
     });
 
-    $('#foodTypeId').on('change', function(){
-        console.log("test");
-        foodTable.column(0).search("Forrett").draw();
+    $('#foodTypeId').on('keyup click', function(){
+         $('#foodTable').DataTable().column(0).search($(this).val(), false, false).draw();
     });
 
     foodTable = $('#foodTable').DataTable( {
-        searching: false,
         paging: false,
         info : false,
+        "sDom": 't',
+         "autoWidth": false,
         ajax: {
             url: 'rest/food',
             dataSrc: ''
         },
         columns: [
-            { data: 'type' },
+            { data: 'type', },
             { data: 'name' },
             { data: 'desc' },
             {
                 "class": "center",
                 "data": "price",
-                "width": "80",
+                "width": "60",
                 "render": function (val, type, row) {
                     return "kr " + Number(val).toFixed(2);
                 }
@@ -168,32 +170,42 @@ $(document).ready(function() {
                 "orderable":      false,
                 "data":           null,
                 "defaultContent": "<button>-</button>",
-                "width": "20"
+                "width": "15"
             },
             {
                 "className":      'food-amount',
                 "orderable":      false,
                 "data":           'amount',
-                "width": "20"
+                "width": "15"
             },
             {
                 "className":      'more-food',
                 "orderable":      false,
                 "data":           null,
                 "defaultContent": "<button>+</button>",
-                "width": "20"
+                "width": "15"
             },
             {
                 "className":      'totalPrice',
                 "orderable":      false,
                 "data": null,
-                "width": "80",
+                "width": "64",
                 "render": function (data,type, row, meta) {
                     return "kr " + Number(data.amount * data.price).toFixed(2);
                 }
             },
         ]
 
+    });
+
+    foodTable.column(0).visible(false);
+
+    $.ajax({
+        type:"GET",
+        url: "rest/table/maxTablePlaces",
+        success: function(data){
+            $("#tableSize").attr("max", parseInt(data));
+        }
     });
 
     $('#foodTable tbody').on('click', 'td.more-food', function () {
@@ -212,4 +224,18 @@ $(document).ready(function() {
             updateFoods(data);
         }
     } );
+
+    $('.btn-minuse').on('click', function(){
+        var field = $(this).parent().siblings('input')
+        var val = parseInt(field.val());
+        if (val > field.attr("min")) field.val(val - 1)
+        field.change();
+    })
+
+    $('.btn-pluss').on('click', function(){
+        var field = $(this).parent().siblings('input')
+        var val = parseInt(field.val());
+        if (val < field.attr("max")) field.val(val + 1)
+        field.change();
+    })
 })

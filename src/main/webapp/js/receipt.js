@@ -44,7 +44,6 @@ function getQueryVariable(variable) {
     alert('Query Variable ' + variable + ' not found');
 }
 
-
 $(document).ready(function() {
     var doc = new jsPDF();
         var specialElementHandlers = {
@@ -65,11 +64,20 @@ $(document).ready(function() {
     });
 
     $('#cmd').click(function () {
-        console.log("test");
-        doc.fromHTML($('#receipt').html(), 15, 15, {
+        var text = ("Kvitering - Resturant<br><br>" + jsonToReceipt(reservation)).split("<br>");
+        doc.text(text, 15, 15, {
             'width': 170,
             'elementHandlers': specialElementHandlers
         });
-        doc.save('test.pdf');
+        doc.save('kvitering.pdf');
+    });
+
+    $('#print').click(function () {
+        var divToPrint=document.getElementById('receipt');
+        var newWin=window.open('','Print-Window');
+        newWin.document.open();
+        newWin.document.write('<html><body onload="window.print()">'+divToPrint.innerHTML+'</body></html>');
+        newWin.document.close();
+        setTimeout(function(){newWin.close();},10);
     });
 });
