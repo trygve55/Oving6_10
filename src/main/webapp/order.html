@@ -36,29 +36,31 @@
   </nav>
   <div class="panel panel-default">
       <div class="panel-body">
-          <div class="well">
-              <div class='input-group date' id='datetimepicker'>
-                  <input type='text' class="form-control" style="visibility:hidden" />
-                  <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
+          <div class="row">
+              <div class="well col-xs-12 col-lg-4">
+                  <div class='input-group date' id='datetimepicker' style="width: 100%;">
+                      <input type='text' class="form-control" style="visibility:hidden; display:none;" />
+                      <span class="input-group-addon" style="visibility:hidden; display:none;">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                  </div>
               </div>
-          </div>
-          <div class="well">
-              <h3 id="nowHeader"></h3><br>
-              <table id="nowOrderTable" class="display compact">
-                  <thead>
-                  <tr><th>Bord nummer</th><th>Bestilling</th></tr>
-                  </thead>
-              </table>
-          </div>
-          <div class="well">
-              <h3 id="nextHeader"></h3><br>
-              <table id="nextOrderTable" class="display compact">
-                  <thead>
-                  <tr><th>Bord nummer</th><th>Bestilling</th></tr>
-                  </thead>
-              </table>
+              <div class="well col-xs-12 col-lg-4">
+                  <h3 id="nowHeader"></h3><br>
+                  <table id="nowOrderTable" class="display compact">
+                      <thead>
+                      <tr><th>Bord nummer</th><th>Bestilling</th></tr>
+                      </thead>
+                  </table>
+              </div>
+              <div class="well col-xs-12 col-lg-4">
+                  <h3 id="nextHeader"></h3><br>
+                  <table id="nextOrderTable" class="display compact">
+                      <thead>
+                      <tr><th>Bord nummer</th><th>Bestilling</th></tr>
+                      </thead>
+                  </table>
+              </div>
           </div>
       </div>
   </div>

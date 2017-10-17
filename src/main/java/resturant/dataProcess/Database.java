@@ -294,8 +294,8 @@ public class Database {
             connection = dataSource.getConnection();
             ps = connection.prepareStatement("INSERT INTO Foods(food_type_id, food_name, food_desc, food_price) VALUES (?, ?, ?, ?);");
             ps.setInt(1, food.getTypeId());
-            ps.setString(2, food.getName());
-            ps.setString(3, food.getDesc());
+            ps.setString(2, XSS.parse(food.getName()));
+            ps.setString(3, XSS.parse(food.getDesc()));
             ps.setFloat(4, food.getPrice());
             ps.executeUpdate();
 
@@ -472,7 +472,7 @@ public class Database {
             ps = connection.prepareStatement("INSERT INTO  Reservation(start_timestamp, end_timestamp, for_name, bord_id, card_number, card_pin, card_expiry_date) VALUES (?, ?, ?, ?, ?, ?, ?);", Statement.RETURN_GENERATED_KEYS);
             ps.setTimestamp(1, new java.sql.Timestamp(reservation.getStart().getTime()));
             ps.setTimestamp(2, new java.sql.Timestamp(reservation.getEnd().getTime()));
-            ps.setString(3, reservation.getForName() );
+            ps.setString(3, XSS.parse(reservation.getForName()) );
             ps.setInt(4, reservation.getBordId() );
             ps.setLong(5, reservation.getCardNumber() );
             ps.setInt(6, reservation.getCardPin() );

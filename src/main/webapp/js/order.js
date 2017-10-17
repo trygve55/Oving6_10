@@ -31,6 +31,7 @@ $(document).ready(function() {
         searching: false,
         paging: false,
         info : false,
+        "autoWidth": false,
         "oLanguage": {"sZeroRecords": "", "sEmptyTable": "Ingen serveringer for dette tidspunkt."},
         ajax: {
             url: 'rest/orders/' + date.toJSON(),
@@ -65,6 +66,7 @@ $(document).ready(function() {
     searching: false,
     paging: false,
     info : false,
+    "autoWidth": false,
     "oLanguage": {"sZeroRecords": "", "sEmptyTable": "Ingen serveringer for dette tidspunkt."},
     ajax: {
         url: 'rest/orders/' + nextDate.toJSON(),

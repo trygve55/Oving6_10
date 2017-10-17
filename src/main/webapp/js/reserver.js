@@ -88,10 +88,21 @@ function validateFields() {
 
 function updateTotalPrice() {
     var sum = 0.0;
+    var string = "";
+
+    if (foods.length == 0) string += "<div style='text-align: right; margin-right: 1.05cm;'>Her kommer bestillingen</div>";
+
     for (var i = 0;i < foods.length;i++) {
-        sum += foods[i].price*foods[i].amount;
+        if (foods[i].amount != 0) {
+            sum += foods[i].price*foods[i].amount;
+            string += "<text style='float: left; margin-left: 1.05cm;'>" + foods[i].amount + "x " + foods[i].name +
+            "</text><text style='float: right; margin-right: 1.05cm;'> kr " +
+             (foods[i].price*foods[i].amount).toFixed(2) + "</text><br>";
+        }
     }
-    $("#foodSum").html(sum.toFixed(2));
+
+    $("#foodText").html(string);
+    $("#foodSum").html("Sum: kr " + sum.toFixed(2));
 }
 
 $(document).ready(function() {
@@ -105,6 +116,10 @@ $(document).ready(function() {
         enabledHours: [11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22],
         useStrict: true,
         keepInvalid: true
+    });
+
+    $('#datetimepicker').on('focus', 'input', function() {
+        $('#datetimepicker').data("DateTimePicker").show();
     });
 
     $('#cardExpiryDate').datetimepicker({
@@ -148,7 +163,7 @@ $(document).ready(function() {
         paging: false,
         info : false,
         "sDom": 't',
-         "autoWidth": false,
+        "autoWidth": false,
         ajax: {
             url: 'rest/food',
             dataSrc: ''
@@ -184,7 +199,7 @@ $(document).ready(function() {
                 "data":           null,
                 "defaultContent": "<button>+</button>",
                 "width": "15"
-            },
+            }/*,
             {
                 "className":      'totalPrice',
                 "orderable":      false,
@@ -193,7 +208,7 @@ $(document).ready(function() {
                 "render": function (data,type, row, meta) {
                     return "kr " + Number(data.amount * data.price).toFixed(2);
                 }
-            },
+            },*/
         ]
 
     });
